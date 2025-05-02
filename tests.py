@@ -132,6 +132,17 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(4, possible_moves[Action.LEFT].score)
         self.assertEqual(4, possible_moves[Action.RIGHT].score)
 
+        grid_horizontal: Grid = [[0, 2, 0, 2], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]
+        result_left: Grid = [[4, 0, 0, 0], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]
+        result_right: Grid = [[0, 0, 0, 4], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]
+
+        self.game_state.grid = grid_horizontal
+        possible_moves = self.game_state.get_possible_moves()
+        self.assertEqual(possible_moves[Action.LEFT].grid, result_left)
+        self.assertEqual(possible_moves[Action.RIGHT].grid, result_right)
+        self.assertEqual(4, possible_moves[Action.LEFT].score)
+        self.assertEqual(4, possible_moves[Action.RIGHT].score)
+
         grid_vertical: Grid = [[0, 2, 0, 0], EMPTY_ROW, [0, 2, 0, 0], EMPTY_ROW]
         result_up: Grid = [[0, 4, 0, 0], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]
         result_down: Grid = [EMPTY_ROW, EMPTY_ROW, EMPTY_ROW, [0, 4, 0, 0]]
@@ -142,6 +153,18 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(possible_moves[Action.DOWN].grid, result_down)
         self.assertEqual(4, possible_moves[Action.UP].score)
         self.assertEqual(4, possible_moves[Action.DOWN].score)
+
+        grid_vertical: Grid = [EMPTY_ROW, [0, 2, 0, 0], EMPTY_ROW, [0, 2, 0, 0]]
+        result_up: Grid = [[0, 4, 0, 0], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]
+        result_down: Grid = [EMPTY_ROW, EMPTY_ROW, EMPTY_ROW, [0, 4, 0, 0]]
+
+        self.game_state.grid = grid_vertical
+        possible_moves = self.game_state.get_possible_moves()
+        self.assertEqual(possible_moves[Action.UP].grid, result_up)
+        self.assertEqual(possible_moves[Action.DOWN].grid, result_down)
+        self.assertEqual(4, possible_moves[Action.UP].score)
+        self.assertEqual(4, possible_moves[Action.DOWN].score)
+
 
     def test_get_possible_moves_single_merge_three_in_a_row(self):
         grid_horizontal: Grid = [[2, 2, 2, 0], EMPTY_ROW, EMPTY_ROW, EMPTY_ROW]

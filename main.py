@@ -29,7 +29,7 @@ def main():
     # Game objects
     theme = Theme(font_size_medium=32, font_size_large=64, padding_small=PADDING_SMALL)
     gui = GameGUI(theme=theme, tile_size=TILE_SIZE)
-    # game_state.set_grid([[2, 4, 16, 64], [4, 2, 32, 32], [2, 4, 16, 64], [8, 2, 4, 8]])
+    # gui.game_state.set_grid([[2, 4, 16, 64], [4, 2, 32, 32], [2, 4, 16, 64], [8, 2, 4, 8]])
 
     window_size = gui.rect.size
     screen = pygame.display.set_mode(window_size)

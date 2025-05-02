@@ -132,8 +132,8 @@ class GameOverScreen:
 
     def draw(self, surface: pygame.Surface, theme: Theme) -> pygame.Rect:
         opacity_mask = pygame.Surface(surface.get_size())
-        opacity_mask.fill((100, 100, 100))
-        opacity_mask.set_alpha(100)
+        opacity_mask.fill((50, 50, 50))
+        opacity_mask.set_alpha(150)
         surface.blit(opacity_mask, (0, 0))
 
         self.message_box.set_colorkey((0, 0, 0))
@@ -188,7 +188,7 @@ class GameGUI:
         self.replay_button = Button(
             w=2 * tile_size,
             h=tile_size,
-            color=theme.board,
+            color=theme.blank_tile,
             text="Replay",
             light_text=True,
             font_size=SIZE.MEDIUM,

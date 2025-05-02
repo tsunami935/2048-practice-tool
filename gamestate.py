@@ -148,15 +148,16 @@ class GameState:
                 r = []
                 prev = 0
                 for element in reversed(row):
-                    if prev == 0:
-                        prev = element
-                    elif prev == element:
-                        r.append(prev + element)
-                        state_right.log_merge(prev)
-                        prev = 0
-                    else:
-                        r.append(prev)
-                        prev = element
+                    if element:
+                        if prev == 0:
+                            prev = element
+                        elif prev == element:
+                            r.append(prev + element)
+                            state_right.log_merge(prev)
+                            prev = 0
+                        else:
+                            r.append(prev)
+                            prev = element
                 if prev:
                     if len(r) and prev == r[-1]:
                         r[-1] += prev
