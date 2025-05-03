@@ -185,10 +185,20 @@ class GameGUI:
 
         self.board = Board(tile_size=tile_size, padding=self.theme.padding_small)
         self.score_board = ScoreBoard(
-            int(0.5 * self.board.rect.width),
+            int(0.5 * self.board.rect.width) + self.theme.padding_small,
             self.theme.padding_small,
-            int(0.4 * self.board.rect.width),
+            2 * TILE_SIZE,
             tile_size,
+        )
+        self.newgame_button = Button(
+            x=int(0.5 * self.board.rect.width) - PADDING_SMALL - 2 * TILE_SIZE,
+            y=self.score_board.rect.top,
+            w=2 * TILE_SIZE,
+            h=TILE_SIZE,
+            color=theme.board,
+            text="New Game",
+            onclick=self.game_state.reset,
+            font_size=SIZE.SMALL,
         )
         self.board.rect.y = self.score_board.rect.bottom + PADDING_SMALL
 
@@ -207,6 +217,7 @@ class GameGUI:
 
     def draw(self, surface: pygame.Surface, theme: Theme) -> pygame.Rect:
         surface.fill(theme.bg)
+        self.newgame_button.draw(surface, theme)
         self.score_board.draw(surface, theme, self.game_state.score)
         self.board.draw(surface, theme, self.game_state.grid)
         if self.game_state.status == GameStatus.END:
@@ -236,6 +247,14 @@ class GameGUI:
                         pass
                 if state == GameStatus.END:
                     print(f"Game Over! Your score: {self.game_state.score}")
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_button: int = event.button
+                mouse_coor: Coordinate = event.pos
+                if (
+                    mouse_button == pygame.BUTTON_LEFT
+                    and self.newgame_button.rect.collidepoint(mouse_coor)
+                ):
+                    self.newgame_button.onclick()
         if self.game_state.status == GameStatus.END:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_button: int = event.button
