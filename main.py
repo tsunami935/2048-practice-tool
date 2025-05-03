@@ -4,9 +4,8 @@
 from __future__ import annotations
 import pygame
 
-from gamestate import GameState, Action, GameStatus
 from theme import Theme
-from gui import Board, ScoreBoard, GameOverScreen, GameGUI
+from gui import GameGUI
 
 TILE_SIZE = 64
 PADDING_SMALL = 16
