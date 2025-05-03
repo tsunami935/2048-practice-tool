@@ -24,10 +24,14 @@ def main():
     pygame.display.set_caption("2048")
     clock = pygame.time.Clock()
     running = True
-    
 
     # Game objects
-    theme = Theme(font_size_medium=32, font_size_large=64, padding_small=PADDING_SMALL)
+    theme = Theme(
+        font_size_small=16,
+        font_size_medium=32,
+        font_size_large=64,
+        padding_small=PADDING_SMALL,
+    )
     gui = GameGUI(theme=theme, tile_size=TILE_SIZE)
     # gui.game_state.set_grid([[2, 4, 16, 64], [4, 2, 32, 32], [2, 4, 16, 64], [8, 2, 4, 8]])
 

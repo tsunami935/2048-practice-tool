@@ -119,9 +119,17 @@ class ScoreBoard:
             rect=self.rect,
             border_radius=theme.radius,
         )
-        text = theme.font_medium.render(str(score), True, theme.light_text)
-        text_pos = text.get_rect(center=score_board.center)
-        surface.blit(text, text_pos)
+        score_label = theme.font_small.render("Score", True, theme.light_text)
+        label_pos = score_label.get_rect(
+            centerx=score_board.centerx, centery=score_board.y + score_board.h // 4
+        )
+        surface.blit(score_label, label_pos)
+
+        score_text = theme.font_medium.render(str(score), True, theme.light_text)
+        text_pos = score_text.get_rect(
+            centerx=score_board.centerx, centery=score_board.bottom - score_board.h // 3
+        )
+        surface.blit(score_text, text_pos)
         return score_board
 
 
@@ -232,5 +240,8 @@ class GameGUI:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_button: int = event.button
                 mouse_coor: Coordinate = event.pos
-                if mouse_button == pygame.BUTTON_LEFT and self.replay_button.rect.collidepoint(mouse_coor):
+                if (
+                    mouse_button == pygame.BUTTON_LEFT
+                    and self.replay_button.rect.collidepoint(mouse_coor)
+                ):
                     self.replay_button.onclick()
