@@ -13,11 +13,13 @@ class SIZE(StrEnum):
     LARGE = "large"
 
 class TileTheme:
+    """Data class for tile theme."""
     def __init__(self, color: str = "beige", light: bool = False):
         self.tile_color = color
         self.light = light
 
 class Theme:
+    """Appearance settings class."""
     def __init__(
         self,
         bg: str = "azure",
@@ -68,6 +70,7 @@ class Theme:
         self.tiles = tiles
 
     def __getitem__(self, tile) -> tuple[Color, Color]:
+        """Get tile and text color of a given tile."""
         if tile > 2048:
             tile = 0
         theme = self.tiles[tile]
@@ -75,8 +78,10 @@ class Theme:
         return theme.tile_color, text_color
 
     def load(file: TextIO) -> Theme:
+        """Load theme from file."""
         data: dict[str, Any] = json.load(file)
         raise NotImplementedError
 
     def dump(self, file: TextIO) -> None:
+        """Write theme to file."""
         raise NotImplementedError

@@ -25,6 +25,7 @@ class GameStatus(Enum):
 
 
 class NextState:
+    """Temporary state class."""
     def __init__(self, score: int, grid: Grid):
         self.score = score
         self.grid = grid
@@ -48,6 +49,7 @@ class GameState:
         self.reset()
 
     def reset(self) -> None:
+        """Reset game state."""
         for i in range(GRID_SIZE):
             for j in range(GRID_SIZE):
                 self.grid[i][j] = 0
@@ -66,6 +68,7 @@ class GameState:
         self.possible_moves = self.get_possible_moves()
 
     def new_tiles(self, count: int = 1) -> None:
+        """Spawn a number of new tiles to the board."""
         # Find empty squares
         free = []
         for i in range(GRID_SIZE):
@@ -85,6 +88,7 @@ class GameState:
                 self.grid[i][j] = 2
 
     def get_possible_moves(self) -> ActionMap:
+        """Gets the result of the current state-action pairs."""
         action_map: ActionMap = {}
 
         # Fast check if no possible moves:
@@ -225,6 +229,7 @@ class GameState:
         return action_map
 
     def step(self, move: Action) -> GameStatus:
+        """Transition to the next state given an action."""
         # raise NotImplementedError("GameState.step not implemented.")
         next_state = self.possible_moves.get(move)
         if next_state:
@@ -237,6 +242,7 @@ class GameState:
         return self.status
 
     def print(self, fout: TextIO = sys.stdout) -> None:
+        """Print current state."""
         print(
             "In Progress" if self.status == GameStatus.RUN else "Game Over", file=fout
         )
